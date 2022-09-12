@@ -1,27 +1,22 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 const App = () => {
-  const [count, setCount] = React.useState(0);
+  const [value, setValue] = useState("Hello React");
 
-  const handleIncrease = () => {
-    console.log("Increase");
-    setCount(count + 1);
-  };
-
-  const handleDecrease = () => {
-    console.log("Decrease");
-    setCount(count - 1);
-  };
+  const handleChange = (event) => setValue(event.target.value);
 
   return (
     <div>
-      Count: {count}
-      <button type="button" onClick={handleIncrease}>
-        Increase
-      </button>
-      <button type="button" onClick={handleDecrease}>
-        Decrease
-      </button>
+      <label>
+        My controlled input: Which has a default value
+        <input type="text" value={value} onChange={handleChange} />
+        {/* You really should have controlled outputs/inputs as it can introduce bugs
+        in this case, you can control the input but assinging the value attribute, now
+        this no longer uses its own internal state, but the state you provide from React */}
+      </label>
+      <p>
+        <strong>Output:</strong> {value}
+      </p>
     </div>
   );
 };
